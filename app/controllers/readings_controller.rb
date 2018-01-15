@@ -1,26 +1,19 @@
 class ReadingsController < ApplicationController
-  # GET /measures
-  # GET /measures.json
+
   def index
     @readings = Reading.all
   end
 
-  # GET /measures/1
-  # GET /measures/1.json
   def show
   end
 
-  # GET /measures/new
   def new
     @reading = Reading.new
   end
 
-  # GET /measures/1/edit
   def edit
   end
 
-  # POST /measures
-  # POST /measures.json
   def create
     @reading = Reading.new(reading_params)
 
@@ -35,12 +28,10 @@ class ReadingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /measures/1
-  # PATCH/PUT /measures/1.json
   def update
     respond_to do |format|
       if @reading.update(reading_params)
-        format.html { redirect_to @reading, notice: 'Reading was successfully updated.' }
+        format.html { redirect_to @reading, notice: 'Moisture reading was successfully updated.' }
         format.json { render :show, status: :ok, location: @reading}
       else
         format.html { render :edit }
@@ -49,12 +40,10 @@ class ReadingsController < ApplicationController
     end
   end
 
-  # DELETE /measures/1
-  # DELETE /measures/1.json
   def destroy
     @reading.destroy
     respond_to do |format|
-      format.html { redirect_to measures_url, notice: 'Value was successfully destroyed.' }
+      format.html { redirect_to measures_url, notice: 'Moisture reading was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,7 +54,7 @@ class ReadingsController < ApplicationController
     @reading = Reading.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow permitted values.
   def reading_params
     params.require(:reading).permit(:value)
   end
