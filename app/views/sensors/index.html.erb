@@ -1,0 +1,25 @@
+<table id="sensors" class="display table" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Model</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sensors.each do |sensor| %>
+      <tr>
+        <td><%= sensor.name %></td>
+        <td><%= sensor.description %></td>
+        <td><%= sensor.model %></td>
+        <td class="action-buttons">
+          <%= link_to 'Show', sensor_path(sensor.id), class: 'btn btn-success' %>
+          <%= link_to 'Edit', edit_sensor_path(sensor.id), class: 'btn btn-primary' %>
+          <%= link_to 'Destroy', sensor_path(sensor.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
