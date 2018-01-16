@@ -1,0 +1,17 @@
+<%= form_for(@reading) do |f| %>
+    <div class="form-group">
+        <%= f.label :sensor_id %>
+        <%= f.number_field :sensor_id %>
+    </div>
+    <div class="form-group">
+      <%= f.label :value %>
+      <%= f.number_field :value %>
+    </div>
+    <div class="form-group">
+      <%= f.label :created_at %>
+      <%= f.datetime_field :created_at %>
+    </div>
+    <div class="form-group actions">
+      <%= f.submit 'Submit', :class => 'btn btn-lg btn-success btn-block' %>
+    </div>
+<% end %>

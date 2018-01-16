@@ -1,7 +1,13 @@
 class SensorsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def index
     @sensors =  Sensor.all
+    # if @sensors.any?
+    #     render json: @sensors
+    #   else
+    #     render json: {}, status: :not_found
+    #   end
   end
 
   def new
@@ -9,8 +15,8 @@ class SensorsController < ApplicationController
   end
 
   def create
-    @sensor = Sensor.new(sensor_params)
-    if @sensor.save
+    sensor = Sensor.new(sensor_params)
+    if sensor.save
     render json: { id: sensor.id }, status: :ok
     else
     render json: { errors: sensor.errors.messages },
