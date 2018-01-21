@@ -37,6 +37,10 @@ class SensorsController < ApplicationController
 
   def show
     @sensor = Sensor.find_by(id: params[:id])
+    @readings = @sensor.readings.paginate(:page => params[:page], :per_page => 20)
+    @sensor_readings = @sensor.readings.order('created_at desc').limit(10)
+                          .map{|m| { time: m.created_at,
+                                     value: m.value } }
     #
     # if sensor
     #   render(
@@ -70,6 +74,7 @@ class SensorsController < ApplicationController
 
   def destroy
     sensor = Sensor.find(params[:id])
+    sensor.destroy
 
     respond_to do |format|
       format.html { redirect_to sensors_url, notice: 'Sensor was successfully destroyed.' }

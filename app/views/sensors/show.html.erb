@@ -21,16 +21,46 @@
 </p>
 
 <table>
-    <tr>
-      <th>Sensor ID</th>
-      <th>Value</th>
-      <th>Created At</th>
-    </tr>
-  <% @sensor.readings.each do |reading| %>
+  <tr>
+    <th>Sensor ID</th>
+    <th>Value</th>
+    <th>Created At</th>
+  </tr>
+  <% @readings.each do |reading| %>
   <tr>
     <td><%= "#{reading.sensor.id}" %></td>
     <td><%= "#{reading.value}" %></td>
-    <td><%= "Time Stamp: #{reading.created_at}" %></td>
-    </tr>
-    <% end %>
-  </table>
+    <td>Time Stamp: <span class="time-stamp"><%= "#{reading.created_at}" %></span></td>
+  </tr>
+  <% end %>
+  <%= will_paginate @readings, renderer: BootstrapPagination::Rails %>
+</table>
+
+<% unless @sensor_readings.blank? %>
+  <div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Sensor Evolution
+      </div>
+      <div class="panel-body">
+        <div id="sensor-evolution" style="height: 250px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <% content_for(:extra_scripts) do %>
+    <script type="text/javascript">
+    $(document).ready(function (){
+      new Morris.Area({
+        element: 'sensor-evolution',
+        data: <%= raw @sensor_readings.to_json %>,
+        xkey: 'time',
+        ykeys: ['value'],
+        labels: ['Value'],
+        pointSize: 2,
+        resize: true
+      });
+    });
+    </script>
+  <% end %>
+<% end %>

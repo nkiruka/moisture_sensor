@@ -1,3 +1,10 @@
+<% content_for(:page_header) do %>
+  <%= "List of sensors" %>
+<% end %>
+<% content_for :panel_heading do %>Content<% end %>
+
+<p id="notice"><%= notice %></p>
+
 <table id="sensors" class="display table" cellspacing="0" width="100%">
   <thead>
     <tr>
@@ -23,3 +30,11 @@
     <% end %>
   </tbody>
 </table>
+
+<% content_for(:extra_scripts) do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#sensors').DataTable({ responsive: true });
+  });
+  </script>
+<% end %>

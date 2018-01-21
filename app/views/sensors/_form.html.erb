@@ -1,6 +1,7 @@
 <%= form_for(@sensor) do |f| %>
   <% if @sensor.errors.any? %>
     <div id="error_explanation">
+        <h3><%= pluralize(@sensor.errors.count, "error") %> prohibited this sensor from being saved:</h3>
       <ul>
       <% @sensor.errors.full_messages.each do |message| %>
         <li><%= message %></li>
