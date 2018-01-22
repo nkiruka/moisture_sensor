@@ -37,10 +37,22 @@ class SensorsController < ApplicationController
 
   def show
     @sensor = Sensor.find_by(id: params[:id])
-    @readings = @sensor.readings.paginate(:page => params[:page], :per_page => 20)
-    @sensor_readings = @sensor.readings.order('created_at desc').limit(10)
-                          .map{|m| { time: m.created_at,
-                                     value: m.value } }
+    # @readings = @sensor.readings.paginate(:page => params[:page], :per_page => 20)
+
+    interval = 60 # 10 minutes is 600 seconds
+    select_statment = "sensor_id, AVG(value) AS value, to_timestamp(floor((extract('epoch' from created_at) / #{interval})) * #{interval}) AT TIME ZONE 'UTC' AS interval_timestamp"
+
+    @readings = @sensor.readings.select(select_statment)
+                                .group("sensor_id, interval_timestamp")
+                                .order("interval_timestamp desc")
+                                .paginate(:page => params[:page],
+                                          :per_page => 20)
+
+    @sensor_readings = @sensor.readings.select(select_statment)
+                              .group("sensor_id, interval_timestamp")
+                              .order("interval_timestamp desc")
+                              .map{|m| { time: m.interval_timestamp,
+                                          value: m.value } }
     #
     # if sensor
     #   render(

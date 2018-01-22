@@ -30,7 +30,7 @@
   <tr>
     <td><%= "#{reading.sensor.id}" %></td>
     <td><%= "#{reading.value}" %></td>
-    <td>Time Stamp: <span class="time-stamp"><%= "#{reading.created_at}" %></span></td>
+    <td>Time Stamp: <span class="time-stamp"><%= "#{reading.interval_timestamp}" %></span></td>
   </tr>
   <% end %>
   <%= will_paginate @readings, renderer: BootstrapPagination::Rails %>
