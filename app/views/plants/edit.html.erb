@@ -1,0 +1,24 @@
+<%= form_for(@plant) do |f| %>
+  <% if @plant.errors.any? %>
+    <div id="error_explanation">
+        <h3><%= pluralize(@plant.errors.count, "error") %> prohibited this sensor from being saved:</h3>
+      <ul>
+      <% @plant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :sensor_id%>
+      <%= f.text_field :sensor_id %>
+    </div>
+    <div class="form-group actions">
+      <%= f.submit 'Submit', :class => 'btn btn-lg btn-success btn-block' %>
+    </div>
+<% end %>

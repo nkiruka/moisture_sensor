@@ -1,0 +1,18 @@
+Plants
+<table id="reading" class="display table" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>sensor_id</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @plants.each do |plant| %>
+      <tr>
+        <td><%= plant.name %></td>
+        <td><%= plant.sensor_id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

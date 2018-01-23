@@ -33,7 +33,7 @@
     <td>Time Stamp: <span class="time-stamp"><%= "#{reading.interval_timestamp}" %></span></td>
   </tr>
   <% end %>
-  <%= will_paginate @readings, renderer: BootstrapPagination::Rails %>
+  <!-- <%#= will_paginate @readings, renderer: BootstrapPagination::Rails %> -->
 </table>
 
 <% unless @sensor_readings.blank? %>

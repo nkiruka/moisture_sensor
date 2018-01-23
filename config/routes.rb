@@ -7,11 +7,13 @@ Rails.application.routes.draw do
   # end
   root to: 'home#index'
 
-  get 'dashboard', to: 'main#index'
-
   resources :sensors
   resources :readings
-  resources :plant_models
+  resources :plants
+
+  get 'dashboard', to: 'main#index'
+
+
 
 
 end
