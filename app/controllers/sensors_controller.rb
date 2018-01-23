@@ -23,7 +23,7 @@ class SensorsController < ApplicationController
     @sensor = Sensor.find_by(id: params[:id])
     # @readings = @sensor.readings.paginate(:page => params[:page], :per_page => 20)
 
-    interval = 600 # 10 minutes is 600 seconds
+    interval = 6 # 10 minutes is 600 seconds
     select_statment = "sensor_id, AVG(value) AS value, to_timestamp(floor((extract('epoch' from created_at) / #{interval})) * #{interval}) AT TIME ZONE 'UTC' AS interval_timestamp"
     @readings = @sensor.readings.timestamps(select_statment)
     params[:page] = 1 if params[:page].to_i < 1
