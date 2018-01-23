@@ -3,11 +3,6 @@ class SensorsController < ApplicationController
 
   def index
     @sensors =  Sensor.all
-    # if @sensors.any?
-    #     render json: @sensors
-    #   else
-    #     render json: {}, status: :not_found
-    #   end
   end
 
   def new
@@ -22,17 +17,6 @@ class SensorsController < ApplicationController
     render json: { errors: sensor.errors.messages },
       status: :bad_request
     end
-
-    # @sensor = Sensor.new(sensor_params)
-    # respond_to do |format|
-    #   if @sensor.save
-    #     format.html { redirect_to @sensor, notice: 'Sensor was successfully created.' }
-    #     format.json { render :show, status: :created, location: @sensor }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @sensor.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def show

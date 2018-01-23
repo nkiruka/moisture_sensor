@@ -5,7 +5,4 @@ class Reading < ApplicationRecord
     select(select_statment).group("sensor_id, interval_timestamp")
     .order("interval_timestamp desc")
   end
-
-
-
 end
