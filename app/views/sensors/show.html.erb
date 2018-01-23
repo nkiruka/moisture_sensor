@@ -26,14 +26,39 @@
     <th>Value</th>
     <th>Created At</th>
   </tr>
-  <% @readings.each do |reading| %>
+  <% @paginated_readings.each do |reading| %>
   <tr>
     <td><%= "#{reading.sensor.id}" %></td>
     <td><%= "#{reading.value}" %></td>
     <td>Time Stamp: <span class="time-stamp"><%= "#{reading.interval_timestamp}" %></span></td>
   </tr>
   <% end %>
-  <%= will_paginate @readings, renderer: BootstrapPagination::Rails %>
+  <nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item <%= disable_previous(params[:page]) %>">
+      <% if previous_link_valid?(params[:page]) %>
+        <%= link_to "Previous", sensor_path(@sensor, page: params[:page].to_i - 1 ), class: "page-link #{disable_previous(params[:page])}" %>
+      <% else %>
+        <%= link_to "Previous", "#", class: "page-link" %>
+      <% end %>
+    </li>
+    <% (1..@total_pages).to_a.each do |num| %>
+
+      <li class="page-item"><%= link_to "#{num}", sensor_path(@sensor, page: num), class: 'page-link' %></li>
+
+    <% end %>
+    <li class="page-item <%= disable_next(@current_page, @total_pages) %>">
+      <% if next_link_valid?(@current_page, @total_pages) %>
+        <%= link_to "Next", sensor_path(@sensor, page: params[:page].to_i + 1), class: "page-link #{disable_next(@current_page, @total_pages)}" %>
+      <% else %>
+        <%= link_to "Next", "#", class: "page-link" %>
+      <% end %>
+    </li>
+  </ul>
+</nav>
+
+
+  <%#= will_paginate @readings, renderer: BootstrapPagination::Rails %>
 </table>
 
 <% unless @sensor_readings.blank? %>

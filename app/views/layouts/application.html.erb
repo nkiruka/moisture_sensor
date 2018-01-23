@@ -8,6 +8,7 @@
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Sensors Admin Panel" %>">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </head>
 
 <body>
@@ -31,6 +32,6 @@
     </div>
   </div>
 </body>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
 <%= content_for?(:extra_scripts) ? yield(:extra_scripts) : nil %>
 </html>
