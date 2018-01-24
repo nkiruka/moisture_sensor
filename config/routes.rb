@@ -11,6 +11,5 @@ Rails.application.routes.draw do
 
   resources :sensors
   resources :readings
-
-
+  resources :plants
 end
