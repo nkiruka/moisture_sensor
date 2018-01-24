@@ -20,7 +20,7 @@
   <%= @sensor.model %>
 </p>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Sensor ID</th>
     <th>Value</th>
@@ -86,6 +86,10 @@
         resize: true
       });
     });
+
+    setTimeout(function() {
+      window.location.reload();
+    }, 7000);
     </script>
   <% end %>
 <% end %>
