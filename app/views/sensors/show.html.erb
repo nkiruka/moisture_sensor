@@ -22,15 +22,15 @@
 
 <table class="table table-striped">
   <tr>
-    <th>Sensor ID</th>
-    <th>Value</th>
-    <th>Created At</th>
+    <th "text-center">Sensor ID</th>
+    <th "text-center">Value</th>
+    <th "text-center">Created At</th>
   </tr>
   <% @paginated_readings.each do |reading| %>
   <tr>
-    <td><%= "#{reading.sensor.id}" %></td>
-    <td><%= "#{reading.value}" %></td>
-    <td>Time Stamp: <span class="time-stamp"><%= "#{reading.interval_timestamp}" %></span></td>
+    <td "text-center"><%= "#{reading.sensor.id}" %></td>
+    <td "text-center"><%= "#{reading.value}" %></td>
+    <td class="text-center"><span class="time-stamp"><%= "#{reading.interval_timestamp}" %></span></td>
   </tr>
   <% end %>
   <nav aria-label="...">
